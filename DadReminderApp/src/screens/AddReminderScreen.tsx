@@ -9,16 +9,17 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'AddReminder'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'AddReminder'> & {
+  addReminder: (title: string) => void;
+};
 
-const AddReminderScreen = ({ navigation }: Props) => {
+const AddReminderScreen = ({ navigation, addReminder }: Props) => {
   const [title, setTitle] = useState('');
 
   const handleSave = () => {
     if (!title.trim()) return;
-
-    console.log('Saved reminder:', title);
-
+    
+    addReminder(title);
     navigation.goBack();
   };
 
